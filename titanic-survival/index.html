@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Titanc trip</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Titanc trip">
+  <meta name="author" content="Alexandru Vasile">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Titanc trip</h1>
+    <h2>Find out if you would have survived the Titanic sinking</h2>
+    <p>Alexandru Vasile<br/>student</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The sinking of the Titanic is one of the most infamous shipwrecks in history.  On April 15, 1912, during her maiden voyage, the Titanic sank after colliding with an iceberg, killing 1502 out of 2224 passengers and crew (67.5% death rate). 
+This sensational tragedy shocked the international community and led to better safety regulations for ships.</p>
+
+<p>This small app tells you if you would have survived the Titanic sinking.
+It is doing this by stimulating your trip on the ship: you insert your information and ticket preferentials and based on a random forest model it makes a prediction of your survival chance.</p>
+
+<p>The app cand be found at: <a href="https://alex-ro.shinyapps.io/shiny-app/">https://alex-ro.shinyapps.io/shiny-app/</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>The data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The training data is obtained from the Titanic Kaggle competition (<a href="http://www.kaggle.com/c/titanic-gettingStarted">http://www.kaggle.com/c/titanic-gettingStarted</a>). It contains the following information about every passenger of the boat:</p>
+
+<pre><code class="r">train &lt;- read.csv(&#39;../shiny-app/titanic-train.csv&#39;)
+colnames(train)
+</code></pre>
+
+<pre><code>##  [1] &quot;PassengerId&quot; &quot;Survived&quot;    &quot;Pclass&quot;      &quot;Name&quot;        &quot;Sex&quot;        
+##  [6] &quot;Age&quot;         &quot;SibSp&quot;       &quot;Parch&quot;       &quot;Ticket&quot;      &quot;Fare&quot;       
+## [11] &quot;Cabin&quot;       &quot;Embarked&quot;
+</code></pre>
+
+<p>and we have informations about </p>
+
+<pre><code>## [1] 891
+</code></pre>
+
+<p>passengers.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>The model</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>To make the prediction for new data point I trained a model with random forest algorithm, but using only 5 variables: Sex, Age, Passenger Class, Fare and Embarked city.</p>
+
+<pre><code>fit &lt;- randomForest(as.factor(Survived) ~ Pclass + Sex + Age + Fare + Embarked, 
+data=train, importance=TRUE, ntree=1000)
+</code></pre>
+
+<p>This model has a prediction accuracy of 78%.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Final thoughts</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This model is really basic and can be easily improved by adding more variables and also with feature engineering.</p>
+
+<h4>Have fun with the app!</h4>
+
+<h3>Thank you!</h3>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The data'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='The model'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Final thoughts'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
