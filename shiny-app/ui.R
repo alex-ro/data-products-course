@@ -34,9 +34,16 @@ shinyUI(
                   This sensational tragedy shocked the international community
                   and led to better safety regulations for ships."),
                 br(),
-                h4(textOutput("result")),
+                p("Usage: Please fill/modify all the inputs and click submit and
+                  you will see the result below."),
                 br(),
-                textOutput("accuracy")
+                
+                h4(textOutput("result")),
+                
+                br(),
+                p("The prediction has an accuracy of 78%."),
+                br(),
+                p("Hint: Women and small children were evacuated first from the Titanic.")
             )
         )
     )

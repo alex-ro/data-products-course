@@ -1,4 +1,4 @@
-setwd('~/workspace/data-science-specialization/data-products-course/shiny-app')
+#setwd('~/workspace/data-science-specialization/data-products-course/shiny-app')
 library(shiny)
 library(rpart)
 library(randomForest)
@@ -31,7 +31,7 @@ fakeDf <- data.frame(
 
 shinyServer(function(input, output) {
     # name, sex, age, class, fare, embarked /// 78% accuracy
-    output$result <- renderText({ 
+    output$result <- renderText({
         
         #the 4th row is the input from the user
         test <- rbind(fakeDf, c(
@@ -47,8 +47,5 @@ shinyServer(function(input, output) {
             paste(input$Name, ", sorry, there is a pretty good chance that you 
                   would have died if you were on Titanic!", sep = "")
         }
-    })
-    output$accuracy <- renderText({
-        "The model has an accuracy of 78%."
     })
 })
